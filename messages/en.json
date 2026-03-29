@@ -1,0 +1,60 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "findTutor": "Find Tutor",
+    "myBooking": "My Bookings",
+    "login": "Login"
+  },
+  "Hero": {
+    "title": "Find the Perfect Tutor, Learn Anywhere",
+    "subtitle": "Connect with expert tutors. Easy booking in a few clicks.",
+    "cta": "Get Started"
+  },
+  "Login": {
+    "title": "Study-Sync",
+    "subtitle": "Welcome back! Log in to manage your classes and schedules.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "fey@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "loginBtn": "Log In",
+    "noAccount": "Don't have an account?",
+    "signupBtn": "Sign Up (Create new account)",
+    "footerTitle": "Find Your Perfect Tutor",
+    "footerDesc": "Connect with professional tutors, manage your availability, and book classes in real-time."
+  },
+  "Dashboard": {
+    "title": "TutorPlatform.",
+    "role_tutor": "Tutor",
+    "role_student": "Student",
+    "overview_tab": "📊 Overview",
+    "manage_tab": "✨ Manage Courses & Slots",
+    "students_tab": "📢 Enrolled Students",
+    "my_schedule": "📅 My Schedule",
+    "find_courses": "🚀 Find More Courses",
+    "logout": "Sign Out",
+    "revenue": "Revenue (Mock)",
+    "total_classes": "Total Classes",
+    "rating": "Rating",
+    "your_courses": "Your Courses",
+    "no_courses": "You haven't opened any courses yet...",
+    "create_course": "✨ Create New Course",
+    "course_name_placeholder": "Course Title",
+    "course_desc_placeholder": "Short Description",
+    "btn_create_course": "+ Open Course",
+    "student_list": "📢 List of Enrolled Students",
+    "student_name": "👤 Student:",
+    "no_students": "No students have booked your classes yet.",
+    "taught_by": "Taught by:",
+    "btn_cancel": "Cancel Appointment",
+    "no_bookings": "You don't have any appointments right now.",
+    "click_to_book": "Click time to book:",
+    "no_slots": "No available slots to register",
+    "set_time": "Set Availability",
+    "select_date": "Select Date",
+    "date_placeholder": "Click to select date...",
+    "start_time": "Start Time",
+    "end_time": "End Time",
+    "btn_save_slot": "+ Save Slot"
+  }
+}

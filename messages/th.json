@@ -1,0 +1,60 @@
+{
+  "Navbar": {
+    "home": "หน้าแรก",
+    "findTutor": "ค้นหาติวเตอร์",
+    "myBooking": "การนัดหมาย",
+    "login": "เข้าสู่ระบบ"
+  },
+  "Hero": {
+    "title": "ค้นหาติวเตอร์ที่ใช่ เรียนรู้ได้ทุกที่",
+    "subtitle": "เชื่อมต่อคุณกับติวเตอร์มืออาชีพ นัดหมายง่ายในไม่กี่คลิก",
+    "cta": "เริ่มค้นหาติวเตอร์"
+  },
+  "Login": {
+    "title": "Study-Sync",
+    "subtitle": "ยินดีต้อนรับ! เข้าสู่ระบบเพื่อจัดการเวลาเรียนและตารางสอนของคุณ",
+    "emailLabel": "อีเมล",
+    "emailPlaceholder": "fey@example.com",
+    "passwordLabel": "รหัสผ่าน",
+    "passwordPlaceholder": "••••••••",
+    "loginBtn": "เข้าสู่ระบบ",
+    "noAccount": "ยังไม่มีบัญชี?",
+    "signupBtn": "สมัครสมาชิก (สร้างบัญชีใหม่)",
+    "footerTitle": "Find Your Perfect Tutor",
+    "footerDesc": "เชื่อมต่อกับติวเตอร์มืออาชีพ จัดการเวลาว่าง และจองคลาสเรียนได้แบบ Real-time จบในที่เดียว"
+  },
+  "Dashboard": {
+    "title": "TutorPlatform.",
+    "role_tutor": "ผู้สอน",
+    "role_student": "ผู้เรียน",
+    "overview_tab": "📊 ภาพรวม (Overview)",
+    "manage_tab": "✨ จัดการวิชา / เวลาว่าง",
+    "students_tab": "📢 คนมาสมัครเรียน",
+    "my_schedule": "📅 ตารางเรียนของคุณ",
+    "find_courses": "🚀 ค้นหาคอร์สเรียนเพิ่ม",
+    "logout": "ออกจากระบบ",
+    "revenue": "รายได้ (จำลอง)",
+    "total_classes": "คลาสทั้งหมด",
+    "rating": "คะแนน",
+    "your_courses": "คอร์สที่คุณเปิดสอน",
+    "no_courses": "ยังไม่ได้เปิดคอร์ส...",
+    "create_course": "✨ สร้างคอร์สใหม่",
+    "course_name_placeholder": "ชื่อวิชาที่จะสอน",
+    "course_desc_placeholder": "รายละเอียดคอร์สสั้นๆ",
+    "btn_create_course": "+ เปิดคอร์ส",
+    "student_list": "📢 รายชื่อนักเรียนที่จอง",
+    "student_name": "👤 นักเรียน:",
+    "no_students": "ยังไม่มีใครจองเรียนกับคุณในตอนนี้",
+    "taught_by": "สอนโดย:",
+    "btn_cancel": "ยกเลิกการนัดหมาย",
+    "no_bookings": "คุณยังไม่มีนัดเรียนในขณะนี้",
+    "click_to_book": "คลิกเวลาเพื่อจอง:",
+    "no_slots": "ยังไม่มีเวลาว่างลงทะเบียน",
+    "set_time": "ระบุเวลาว่าง",
+    "select_date": "เลือกวันที่สอน",
+    "date_placeholder": "คลิกเพื่อเลือกวันที่...",
+    "start_time": "เวลาเริ่ม",
+    "end_time": "เวลาสิ้นสุด",
+    "btn_save_slot": "+ บันทึกเวลาว่าง"
+  }
+}
