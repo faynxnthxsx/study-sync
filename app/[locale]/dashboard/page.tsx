@@ -11,7 +11,7 @@ import { signOutAction, deleteSlot, cancelBooking } from './actions'
 import { ProfileForm } from './components/ProfileForm'
 import { CourseItem } from './components/CourseItem'
 import { Marketplace } from './components/Marketplace'
-import { StudentSchedule } from './components/StudentSchedule' // ✅ แก้เป็น S ใหญ่แล้ว
+import { StudentSchedule } from './components/StudentSchedule' 
 
 export const revalidate = 0
 export const dynamic = 'force-dynamic'
@@ -45,7 +45,7 @@ export default async function DashboardPage(props: {
     availability_slots(start_time, end_time)
   `).eq(profile.role === 'tutor' ? 'tutor_id' : 'student_id', user.id);
 
-  // 🌟 2. ประกอบร่างข้อมูลสำหรับ Marketplace (แก้เรื่องรูปหาย)
+  // 🌟 2. ประกอบร่างข้อมูลสำหรับ Marketplace
   const coursesWithTutors = (rawCourses || []).map(course => {
     const tutorProfile = (allProfiles || []).find(p => p.id === course.tutor_id);
     const tutorReviews = (allReviews || []).filter(r => r.tutor_id === course.tutor_id);
@@ -56,14 +56,14 @@ export default async function DashboardPage(props: {
     return {
       ...course,
       tutors: tutorProfile ? {
-        ...tutorProfile, // กระจาย id, full_name, avatar_url ออกมาให้เรียกใช้ง่ายๆ
+        ...tutorProfile,
         avgRating,
         reviewCount: tutorReviews.length
       } : null
     }
   });
 
-  // 🌟 3. ประกอบร่างข้อมูลสำหรับหน้าตารางเรียน (ใส่รูปติวเตอร์ให้ด้วย)
+  // 🌟 3. ประกอบร่างข้อมูลสำหรับหน้าตารางเรียน
   const bookingsWithDetails = (myBookings || []).map(booking => {
     const tutorProfile = (allProfiles || []).find(p => p.id === booking.tutor_id);
     return {
@@ -83,8 +83,8 @@ export default async function DashboardPage(props: {
   return (
     <div className="flex min-h-screen bg-slate-50 dark:bg-[#0d0f17] text-slate-900 dark:text-white font-sans transition-colors duration-300">
       
-      {/* Sidebar */}
-      <aside className="w-72 bg-white dark:bg-[#1a1c23] border-r border-slate-200 dark:border-gray-800 flex flex-col fixed h-full z-20 shadow-sm transition-colors">
+      {/* Sidebar: ซ่อนในมือถือ (hidden) และโชว์ในจอคอม (md:flex) */}
+      <aside className="hidden md:flex w-72 bg-white dark:bg-[#1a1c23] border-r border-slate-200 dark:border-gray-800 flex-col fixed h-full z-20 shadow-sm transition-colors">
         <div className="p-8 pb-4">
           <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0066ff] to-[#00e6a3] dark:from-[#8a76ff] dark:to-[#00e6a3] tracking-tighter">{t('title')}</h1>
           <div className="mt-6 flex items-center gap-3 bg-slate-50 dark:bg-[#0d0f17] p-3 rounded-2xl border border-slate-200 dark:border-gray-800">
@@ -105,7 +105,7 @@ export default async function DashboardPage(props: {
           ) : (
             <Link href="?tab=marketplace" className={`block px-4 py-3 rounded-2xl font-bold transition-all ${currentTab === 'marketplace' ? 'bg-[#0066ff] text-white shadow-lg shadow-blue-500/30' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-gray-800'}`}> {t('find_courses')} </Link>
           )}
-          <Link href="?tab=profile" className={`block px-4 py-3 rounded-2xl font-bold transition-all ${currentTab === 'profile' ? 'bg-[#0066ff] text-white shadow-lg' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-gray-800'}`}> ⚙️ ตั้งค่าโปรไฟล์ </Link>
+          <Link href="?tab=profile" className={`block px-4 py-3 rounded-2xl font-bold transition-all ${currentTab === 'profile' ? 'bg-[#0066ff] text-white shadow-lg' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-gray-800'}`}> ⚙️ {locale === 'th' ? 'ตั้งค่าโปรไฟล์' : 'Settings'} </Link>
         </nav>
 
         <div className="p-4 border-t border-slate-200 dark:border-gray-800 flex flex-col gap-3">
@@ -114,29 +114,32 @@ export default async function DashboardPage(props: {
         </div>
       </aside>
 
-      <main className="flex-1 ml-72 p-10">
+      {/* Main: ปรับ ml-0 ในมือถือ และ ml-72 ในจอคอม */}
+      <main className="flex-1 ml-0 md:ml-72 p-4 md:p-10 w-full overflow-x-hidden">
         <div className="max-w-5xl mx-auto">
           {currentTab === 'profile' && (<div className="animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-2xl"><ProfileForm initialData={profile} /></div>)}
 
           {/* Overview: Tutor */}
           {profile.role === 'tutor' && currentTab === 'overview' && (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-12">
+              {/* ปรับ Grid เป็น 1 คอลัมน์ในมือถือ */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard title={t('revenue')} value="฿0.00" icon="💰" />
                 <StatCard title={t('total_classes')} value={myBookings?.length.toString() || "0"} icon="⏳" />
                 <StatCard title={t('rating')} value="5.0" icon="⭐" />
               </div>
+              
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-                <section className="bg-white dark:bg-[#1a1c23] p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
-                  <h3 className="text-lg font-black mb-6 uppercase tracking-widest text-slate-400">วิชาที่สอน</h3>
+                <section className="bg-white dark:bg-[#1a1c23] p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200 shadow-sm">
+                  <h3 className="text-sm md:text-lg font-black mb-6 uppercase tracking-widest text-slate-400">{locale === 'th' ? 'วิชาที่สอน' : 'My Courses'}</h3>
                   <div className="space-y-3">
                     {myCourses.length > 0 ? myCourses.map((c: any) => (<div key={c.id} className="p-4 bg-slate-50 dark:bg-[#0d0f17] rounded-2xl border border-slate-100 font-bold text-[#0066ff]">{c.title}</div>)) : <p className="text-sm text-slate-400 italic text-center py-10">ยังไม่มีวิชาเรียน</p>}
                   </div>
                 </section>
-                <section className="bg-white dark:bg-[#1a1c23] p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
-                  <h3 className="text-lg font-black mb-6 uppercase tracking-widest text-slate-400">เวลาว่าง</h3>
+                <section className="bg-white dark:bg-[#1a1c23] p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-slate-200 shadow-sm">
+                  <h3 className="text-sm md:text-lg font-black mb-6 uppercase tracking-widest text-slate-400">{locale === 'th' ? 'เวลาว่าง' : 'Availability'}</h3>
                   <div className="space-y-3">
-                    {myOwnSlots.length > 0 ? myOwnSlots.map((s: any) => (<div key={s.id} className="p-4 bg-slate-50 dark:bg-[#0d0f17] rounded-2xl flex justify-between items-center"><span className="text-sm font-bold">📅 {formatDate(s.start_time)}</span><span className="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full font-bold">{formatTime(s.start_time)}</span></div>)) : <p className="text-sm text-slate-400 italic text-center py-10">ยังไม่ได้ลงเวลาว่าง</p>}
+                    {myOwnSlots.length > 0 ? myOwnSlots.map((s: any) => (<div key={s.id} className="p-4 bg-slate-50 dark:bg-[#0d0f17] rounded-2xl flex flex-wrap justify-between items-center gap-2"><span className="text-sm font-bold">📅 {formatDate(s.start_time)}</span><span className="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full font-bold">{formatTime(s.start_time)}</span></div>)) : <p className="text-sm text-slate-400 italic text-center py-10">ยังไม่ได้ลงเวลาว่าง</p>}
                   </div>
                 </section>
               </div>
@@ -151,8 +154,8 @@ export default async function DashboardPage(props: {
               translations={{
                 taught_by: t('taught_by'),
                 btn_cancel: t('btn_cancel'),
-                no_schedule: "ยังไม่มีตารางเรียน",
-                find_courses: "ค้นหาคอร์สเรียน →"
+                no_schedule: locale === 'th' ? "ยังไม่มีตารางเรียน" : "No schedule yet",
+                find_courses: locale === 'th' ? "ค้นหาคอร์สเรียน →" : "Find courses →"
               }}
             />
           )}
@@ -167,8 +170,8 @@ export default async function DashboardPage(props: {
             <div className="animate-in fade-in space-y-12">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"><CreateCourseForm /><TimeSlotForm /></div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-                <div><h3 className="text-lg font-black mb-6 uppercase text-slate-400">จัดการคอร์ส</h3><div className="space-y-4">{(myCourses || []).map((c: any) => (<CourseItem key={c.id} course={c} />))}</div></div>
-                <div><h3 className="text-lg font-black mb-6 uppercase text-slate-400">จัดการเวลา</h3><div className="space-y-4 max-h-[500px] overflow-y-auto">{(myOwnSlots || []).map((s: any) => (<div key={s.id} className="bg-white p-5 rounded-[1.5rem] border border-slate-100 flex justify-between items-center shadow-sm"><div><p className="font-black text-sm">📅 {formatDate(s.start_time)}</p><p className="text-[10px] text-slate-400 font-bold uppercase">{formatTime(s.start_time)}</p></div><form action={async () => { await deleteSlot(s.id) }}><button className="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-100 transition-all">🗑️</button></form></div>))}</div></div>
+                <div><h3 className="text-lg font-black mb-6 uppercase text-slate-400">{locale === 'th' ? 'จัดการคอร์ส' : 'Manage Courses'}</h3><div className="space-y-4">{(myCourses || []).map((c: any) => (<CourseItem key={c.id} course={c} />))}</div></div>
+                <div><h3 className="text-lg font-black mb-6 uppercase text-slate-400">{locale === 'th' ? 'จัดการเวลา' : 'Manage Time Slots'}</h3><div className="space-y-4 max-h-[500px] overflow-y-auto">{(myOwnSlots || []).map((s: any) => (<div key={s.id} className="bg-white dark:bg-[#1a1c23] p-5 rounded-[1.5rem] border border-slate-100 dark:border-gray-800 flex justify-between items-center shadow-sm"><div><p className="font-black text-sm">📅 {formatDate(s.start_time)}</p><p className="text-[10px] text-slate-400 font-bold uppercase">{formatTime(s.start_time)}</p></div><form action={async () => { await deleteSlot(s.id) }}><button className="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-100 transition-all">🗑️</button></form></div>))}</div></div>
               </div>
             </div>
           )}
