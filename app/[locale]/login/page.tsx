@@ -53,7 +53,7 @@ export default function LoginPage({
           </p>
 
           {/* --- Google Login Button --- */}
-          <form action={loginWithGoogle}>
+         <form action={async () => { await loginWithGoogle(locale); }}>
             <button 
               type="submit"
               disabled={isPending}
