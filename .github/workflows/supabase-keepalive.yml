@@ -1,0 +1,21 @@
+name: Supabase Keepalive
+
+# ยิง request เบาๆ เข้า Supabase ทุกวัน กัน free tier auto-pause โปรเจคหลังไม่มี
+# activity ~7 วัน — รันบนเซิร์ฟเวอร์ของ GitHub เอง ไม่ต้องเปิดเครื่องเราทิ้งไว้
+# และไม่ต้องตั้งค่าอะไรเพิ่มเติม (anon key เป็นคีย์สาธารณะที่ฝั่งไคลเอนต์เห็นอยู่แล้ว
+# ปลอดภัยที่จะแปะไว้ตรงนี้ — ความปลอดภัยจริงอยู่ที่ RLS ไม่ใช่การซ่อนคีย์นี้)
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          curl -sf "https://swtbdsvyhcwonxoxezcx.supabase.co/rest/v1/courses?select=id&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3dGJkc3Z5aGN3b254b3hlemN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjUxMTEsImV4cCI6MjA5MDAwMTExMX0.a8hK95drKIHAVWkuTDTtPAmYxyL-jI_Zn2bENM4cmRI" \
+            -o /dev/null
